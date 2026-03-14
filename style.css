@@ -1,362 +1,156 @@
-body{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-color: black;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
-#container{
-    width: fit-content;
-    height: 550px;
-    background-image: -moz-radial-gradient();
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e1e24 0%, #151518 100%);
+    color: #fff;
+    overflow: hidden;
 }
 
+/* Add a cool background glow */
+body::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(93, 76, 189, 0.4) 0%, rgba(0,0,0,0) 60%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: none;
+}
 
-
-#calculator{
-    width: 320;
-    height: 520px;
-    background-color: blue;
-    margin: 0 auto;
-    top: 20px;
+.calculator-wrapper {
     position: relative;
-    border-radius: 9px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 1;
+    padding: 3px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.0));
+    border-radius: 28px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
 }
 
-#result{
-    height: 70px;
-    
+.calculator {
+    width: 320px;
+    background: rgba(30, 30, 35, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 26px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-#keyboard{
-    height: fit-content;
+.display {
+    padding: 30px 25px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: rgba(0, 0, 0, 0.1);
+    min-height: 140px;
 }
-.operator, .number, .empty{
-    width: 50px;
-    height: 50px;
-    margin: 15px;
-    float: left;
+
+.display .history {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    min-height: 1.2rem;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.display .output {
+    font-size: 3rem;
+    font-weight: 300;
+    color: #fff;
+    word-break: break-all;
+    line-height: 1.1;
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 20px 25px 25px;
+}
+
+.key {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
     border-radius: 50%;
-    border-width: 0;
-    font-weight: italics;
-    font-size: 18px;
-}
- .number .empty{
-    background-color: blanchedalmond;
- }
- 
- .number, .operator{
+    aspect-ratio: 1; /* keeps buttons perfectly square/round */
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #fff;
     cursor: pointer;
- }
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    user-select: none;
+}
 
- .operative-active, .number .active{
-    font-size: 15px;
- }
- .operator:focus, .number:focus, .empty:focus{
-   outline: 0;  
+.key:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
 
- }
+.key:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.25);
+}
 
- button:nth-child(4){
-    font-size: 29px;
-    background-color: orange;
- }
+.key.action {
+    color: #a5a5b0;
+    background: rgba(0, 0, 0, 0.2);
+}
 
- button:nth-child(8){
-    font-size: 29px;
-    background-color: orange;
- }
+.key.action:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
 
- button:nth-child(12){
-    font-size: 29px;
-    background-color: orange;
- }
+.key.operator {
+    color: #fff;
+    background: #5d4cbd; /* deep, premium purple/blue */
+    box-shadow: 0 4px 15px rgba(93, 76, 189, 0.4);
+}
 
- button:nth-child(16){
-    font-size: 29px;
-    background-color: orange;
- }
+.key.operator:hover {
+    background: #6a58d1;
+    box-shadow: 0 6px 20px rgba(93, 76, 189, 0.6);
+}
 
- button:nth-child(20){
-    font-size: 29px;
-    background-color: orange;
- }
+.key.operator.is-active {
+    background: #fff;
+    color: #5d4cbd;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
 
- button:nth-child(24){
-    font-size: 29px;
-    background-color: orange;
- }
+.key.equals {
+    color: #fff;
+    background: #4cbd8b; /* vibrant green */
+    box-shadow: 0 4px 15px rgba(76, 189, 139, 0.4);
+}
 
- button:nth-child(28){
-    font-size: 29px;
-    background-color: orange;
- }
+.key.equals:hover {
+    background: #5ace9c;
+    box-shadow: 0 6px 20px rgba(76, 189, 139, 0.6);
+}
 
- button:nth-child(32){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(36){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(40){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(44){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(48){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(52){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(56){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(60){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(64){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(68){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(72){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(76){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(80){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(84){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(88){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(92){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(96){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(100){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(104){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(108){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(112){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(116){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(120){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(124){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(128){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(132){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(136){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(140){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(144){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(148){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(152){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(156){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(160){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(164){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(168){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(172){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(176){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(180){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(184){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(188){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(192){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(196){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(200){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(204){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(208){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(212){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(216){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(220){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(224){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(228){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(232){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(236){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(240){
-    font-size: 29px;
-    background-color: orange;
- }
-
- button:nth-child(244){
-    font-size: 29px;
-    background-color: orange;
- }
+.key.zero {
+    grid-column: span 2;
+    aspect-ratio: auto;
+    border-radius: 100px;
+    padding-left: 30px;
+    justify-content: flex-start;
+}

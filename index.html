@@ -3,52 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>babai's calculator</title>
+    <title>Professional Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <div id="container">
-    <div id="calculator">
-
-        <div id="result">
-            <div class="history">
-                <p id="history-value"></p>
+    <div class="calculator-wrapper">
+        <div class="calculator">
+            <div class="display">
+                <div class="history" id="history"></div>
+                <div class="output" id="output">0</div>
             </div>
+            <div class="keyboard">
+                <button class="key action" data-action="clear">AC</button>
+                <button class="key action" data-action="delete">⌫</button>
+                <button class="key action" data-action="percent">%</button>
+                <button class="key operator" data-action="divide">÷</button>
 
-            <div class="output">
-                <p id="output-value">0</p>
+                <button class="key number" data-number="7">7</button>
+                <button class="key number" data-number="8">8</button>
+                <button class="key number" data-number="9">9</button>
+                <button class="key operator" data-action="multiply">×</button>
+
+                <button class="key number" data-number="4">4</button>
+                <button class="key number" data-number="5">5</button>
+                <button class="key number" data-number="6">6</button>
+                <button class="key operator" data-action="subtract">−</button>
+
+                <button class="key number" data-number="1">1</button>
+                <button class="key number" data-number="2">2</button>
+                <button class="key number" data-number="3">3</button>
+                <button class="key operator" data-action="add">+</button>
+
+                <button class="key number zero" data-number="0">0</button>
+                <button class="key number" data-number=".">.</button>
+                <button class="key equals" data-action="calculate">=</button>
             </div>
         </div>
-
-        <div id="keyboard">
-            <button class="operator" id="clear">C</button>
-            <button class="operator" id="backspace">CE</button>
-            <button class="operator" id="percent">%</button>
-            <button class="operator" id="divide">/</button>
-
-            <button class="number" id="7">7</button>
-            <button class="number" id="8">8</button>
-            <button class="number" id="9">9</button>
-            <button class="operator" id="multiply">*</button>
-
-            <button class="number" id="4">4</button>
-            <button class="number" id="5">5</button>
-            <button class="number" id="6">6</button>
-            <button class="operator" id="subtract">-</button>
-
-            <button class="number" id="1">1</button>
-            <button class="number" id="2">2</button>
-            <button class="number" id="3">3</button>
-            <button class="operator" id="add">+</button>
-
-            <button class="number" id="0">0</button>
-            <button class="number" id="decimal">.</button>
-            <button class="operator" id="equals">=</button>
-        </div>
-
     </div>
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
